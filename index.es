@@ -146,31 +146,33 @@ export const reactClass = connect(
     let list = [];
     shiptypes.map((shiptype) => {
       let shipList = alltaisenships[shiptype];
-      list.push(
-        <ListGroupItem active>
+      if(shipList){
+        list.push(
+          <ListGroupItem active>
           <span className="title-type">
             {[shiptype, <span className="badge">{shipList ? shipList.length : 0}</span>]}
           </span>
-        </ListGroupItem>
-      );
-      shipList = shipList ? shipList : [];
-      shipList.map((ship) => {
-        list.push(
-          <ListGroupItem>
-            <Row>
-              <Col xs={4}>
-                lv.{ship[1]}{ship[0]}
-              </Col>
-              <Col xs={2}>
-                {ship[2]}
-              </Col>
-              <Col xs={6}>
-                {ship[3]}
-              </Col>
-            </Row>
           </ListGroupItem>
-        )
-      })
+        );
+        shipList = shipList ? shipList : [];
+        shipList.map((ship) => {
+          list.push(
+            <ListGroupItem>
+              <Row>
+                <Col xs={4}>
+                  lv.{ship[1]}{ship[0]}
+                </Col>
+                <Col xs={2}>
+                  {ship[2]}
+                </Col>
+                <Col xs={6}>
+                  {ship[3]}
+                </Col>
+              </Row>
+            </ListGroupItem>
+          )
+        })
+      }
     });
     return (
       <div id="antisub" className="antisub">
