@@ -89,11 +89,12 @@ export const reactClass = connect(
         var name = taisArr[1];
         ret[p]=tais;
         if(cret[tais]==undefined){
-          cret[tais]={};
+          cret[tais]={count:0};
         }
         if(cret[tais][name]==undefined){
           cret[tais][name]=0;
         }
+        cret[tais].count++;
         cret[tais][name]++;
       }
     }
