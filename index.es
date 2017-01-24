@@ -107,7 +107,6 @@ export const reactClass = connect(
     var allTaisenEquipsArr = this.getAllTaisenEquips();
     var allTaisenEquips = allTaisenEquipsArr[0];
     var taisenEquips = allTaisenEquipsArr[1];
-    console.log(taisenEquips);
     var taisenships = {};
     var shiplvarr = [];
     for (var p in allships) {
