@@ -1,0 +1,78 @@
+#fetchcond {
+	margin: 0 15px;
+}
+
+#fetchcond .list-container {
+	position: absolute;
+	top: 50px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: scroll;
+}
+
+#fetchcond .list-group {
+	margin-top: 15px;
+}
+
+#fetchcond .list-group-item {
+	padding: 8px 15px;
+}
+
+#fetchcond .list-group-item .title-type{
+	font-size: 16px;
+}
+
+#fetchcond .list-group-item .title-type .badge{
+	background-color: #fff;
+	color: #333;
+	float: right;
+	font-weight: bold;
+}
+
+#fetchcond .list-group-item .img-items{
+	width: 30px;
+}
+
+#fetchcond .fleet-group {
+	padding: 5px 8px;
+	float: right;
+	transform: rotate(-15deg);
+	border-radius: 5px;
+}
+
+#fetchcond .fleet-group.group-1 {
+	background-color: #dd2a36;
+}
+#fetchcond .fleet-group.group-2 {
+	background-color: #dc8f28;
+}
+#fetchcond .fleet-group.group-3 {
+	background-color: #1aba59;
+}
+#fetchcond .fleet-group.group-4 {
+	background-color: #4c45c4;
+}
+
+#fetchcond .nav-tabs {
+	margin-top: 10px;
+}
+
+#fetchcond .nav-tabs li{
+	position: relative;
+	overflow: visible;
+}
+
+#fetchcond .nav-tabs li a{
+	padding: 10px 0;
+}
+
+#fetchcond .nav-tabs li a .badge{
+	background-color: rgba(217, 83, 79, .9);
+}
+
+#fetchcond .nav-tabs .badge{
+	position: absolute;
+	right: 0;
+	top:-5px;
+}
