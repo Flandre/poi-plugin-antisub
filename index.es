@@ -81,7 +81,7 @@ export const reactClass = connect(
     for(var p in allEquips){
       var equipid = allEquips[p].api_slotitem_id;
       if(taisenEquipTypes[equipid]){
-        ret[equipid]=taisenEquipTypes[equipid];
+        ret[p]=taisenEquipTypes[equipid];
       }
     }
     return ret;
@@ -101,12 +101,12 @@ export const reactClass = connect(
       for(var i=0;i<slots.length;i++){
         var equipid = slots[i];
         if(allTaisenEquips[equipid]){
-          equiptaisen+=allTaisenEquips;
+          equiptaisen+=allTaisenEquips[equipid];
         }
       }
       var oritaisen = taisen-equiptaisen;
       var slotnum = ship.api_slotnum;
-      if(oritaisen+slotnum*10>100){
+      if(oritaisen+slotnum*10>80){
         var infoshipid = ship.api_ship_id;
         var shiptypenamearr = this.getShipTypeAndName(infoshipid);
         var shiptype = shiptypenamearr[0];
