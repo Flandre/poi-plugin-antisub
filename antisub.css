@@ -1,0 +1,37 @@
+#antisub {
+	margin: 0 15px;
+}
+
+#antisub .list-group {
+	margin-bottom: 10px;
+}
+
+#antisub .list-group-item {
+	padding: 8px 15px;
+}
+
+#antisub .list-group-item .row{
+	margin-right: -5px;
+	margin-left: -5px;
+}
+
+#antisub .list-group-item .row > div{
+	padding-left: 5px;
+	padding-right: 5px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#antisub .list-group-item .title-type{
+	font-size: 16px;
+}
+
+#antisub .list-container {
+	position: absolute;
+	top: 40px;
+	bottom: 0;
+	left: 15px;
+	right: 15px;
+	overflow: scroll;
+}

@@ -9,8 +9,8 @@
   },
   "poiPlugin": {
     "title": "先制反潜",
-    "description": "baka baka baka",
-    "icon": "fa/star",
+    "description": "展示可以先制反潜的舰船",
+    "icon": "fa/bullseye",
     "i18nDir": "i18n/translator",
     "apiVer": {
       "6.3.3": "2.1.1",
