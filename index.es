@@ -67,8 +67,10 @@ export const reactClass = connect(
     var allEquipTypes = this.props.$equips;
     var ret = {};
     for(var p in allEquipTypes){
-      if(allEquipTypes[p].api_tais>0){
-        ret[p]=allEquipTypes[p].api_tais;
+      var tais = allEquipTypes[p].api_tais;
+      var name = allEquipTypes[p].api_name;
+      if(tais>0){
+        ret[p]=[tais,name];
       }
     }
     return ret;
@@ -78,19 +80,33 @@ export const reactClass = connect(
     var taisenEquipTypes = this.getAllTaisenEquipTypes();
     var allEquips = this.props.equips;
     var ret = {};
+    var cret = {};
     for(var p in allEquips){
       var equipid = allEquips[p].api_slotitem_id;
-      if(taisenEquipTypes[equipid]){
-        ret[p]=taisenEquipTypes[equipid];
+      var taisArr = taisenEquipTypes[equipid];
+      if(taisArr){
+        var tais = taisArr[0];
+        var name = taisArr[1];
+        ret[p]=tais;
+        if(cret[tais]==undefined){
+          cret[tais]={};
+        }
+        if(cret[tais][name]==undefined){
+          cret[tais][name]=0;
+        }
+        cret[tais][name]++;
       }
     }
-    return ret;
+    return [ret,cret];
   }
 
   getAllTaisenShipD() {
     var fleetmap = this.getfleetmap();
     var allships = this.props.ships;
-    var allTaisenEquips = this.getAllTaisenEquips();
+    var allTaisenEquipsArr = this.getAllTaisenEquips();
+    var allTaisenEquips = allTaisenEquipsArr[0];
+    var taisenEquips = allTaisenEquipsArr[1];
+    console.log(taisenEquips);
     var taisenships = {};
     var shiplvarr = [];
     for (var p in allships) {
@@ -106,7 +122,7 @@ export const reactClass = connect(
       }
       var oritaisen = taisen-equiptaisen;
       var slotnum = ship.api_slotnum;
-      if(oritaisen+slotnum*10>80){
+      if(oritaisen+slotnum*12>80){
         var infoshipid = ship.api_ship_id;
         var shiptypenamearr = this.getShipTypeAndName(infoshipid);
         var shiptype = shiptypenamearr[0];
@@ -117,7 +133,7 @@ export const reactClass = connect(
         taisenships[shiptype].push([shipname,ship.api_lv,oritaisen,slotnum]);
       }
     }
-    return [fleetmap,taisenships];
+    return [fleetmap,taisenships,taisenEquips];
   }
 
   render() {
