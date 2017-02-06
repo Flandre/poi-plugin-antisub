@@ -154,7 +154,7 @@ export const reactClass = connect(
     }
     for(var p in taisenships){
       var list = taisenships[p];
-      list.sort(function(a,b){return (b[5]<<8+b[1])-(a[5]<<8+a[1])});
+      list.sort(function(a,b){return ((b[5]<<8)+b[1])-((a[5]<<8)+a[1])});
     }
     return [fleetmap, taisenships, taisenEquips];
   }
