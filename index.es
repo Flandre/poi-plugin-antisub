@@ -116,8 +116,13 @@ export const reactClass = connect(
     var allTaisenEquipsArr = this.getAllTaisenEquips();
     var allTaisenEquips = allTaisenEquipsArr[0];
     var taisenEquips = allTaisenEquipsArr[2];
-    if(MaxAntiSub < 100 && taisenEquips[4]==0){ // test only
-      taisenEquips[4] = 2;
+    if(MaxAntiSub < 100){ // test only
+      if(taisenEquips[4]==0){
+        taisenEquips[4] = 2;
+      }
+      if(taisenEquips[3]< 2){
+        taisenEquips[3] += 4;
+      }
     }
     var taisenships = {};
     var shiplvarr = [];
@@ -190,7 +195,9 @@ export const reactClass = connect(
       var needYtaisen = needEquipTaisen - 8;
       var Yslotnum = slotnum-1;
       if(slotnum==3){
-        if(needYtaisen<=6*Yslotnum){
+        if(needYtaisen<=6*Yslotnum-3){
+          ret = [0,2,2];
+        }else if(needYtaisen<=6*Yslotnum){
           ret = [1,2,2];
         }else if(needYtaisen<=6*Yslotnum+4){
           ret = [1,2,3];
@@ -218,7 +225,9 @@ export const reactClass = connect(
           }
         }
       }else{
-        if(needYtaisen<=6*Yslotnum){
+        if(needYtaisen<=6*Yslotnum-3){
+          ret = [0,2,2,2];
+        }else if(needYtaisen<=6*Yslotnum){
           ret = [1,2,2,2];
         }else if(needYtaisen<=6*Yslotnum+4){
           ret = [1,2,2,3];
@@ -315,20 +324,18 @@ export const reactClass = connect(
     }
     if(taisenEquips[3]>0){
       eqlist.push(<span><span className="badge"><img style={{width:"20px"}} src="assets/img/slotitem/118.png"></img>
-        三式</span>*{taisenEquips[3]}</span>)
+        三<br />式</span>*{taisenEquips[3]}</span>)
     }
     if(taisenEquips[4]>0){
       eqlist.push(<span><span className="badge"><img style={{width:"20px"}} src="assets/img/slotitem/118.png"></img>
-        四式</span>*{taisenEquips[4]}</span>)
+        四<br />式</span>*{taisenEquips[4]}</span>)
     }
     return (
       <div id="antisub" className="antisub">
         <link rel="stylesheet" href={join(__dirname, 'antisub.css')}/>
-        <ListGroup>
-          <ListGroupItem>
-          { eqlist }
-          </ListGroupItem>
-        </ListGroup>
+        <div>
+          {eqlist}
+        </div>
         <ListGroup>
           <ListGroupItem>
             <Row>
