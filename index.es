@@ -291,7 +291,7 @@ export const reactClass = connect(
                 <Col xs={4}>
                   lv.{ship[1]}{ship[0]}
                 </Col>
-                <Col xs={6}>
+                <Col xs={8}>
                   {ship[5]}{ship[4]}
                 </Col>
               </Row>
@@ -335,7 +335,7 @@ export const reactClass = connect(
               <Col xs={4}>
                 { "舰娘" }
               </Col>
-              <Col xs={6}>
+              <Col xs={8}>
                 { "最低装备" }
               </Col>
             </Row>
