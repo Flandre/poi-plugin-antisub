@@ -155,7 +155,7 @@ export const reactClass = connect(
     for (let p in taisenships) {
       let list = taisenships[p];
       list.sort(function (a, b) {
-        return (b[5] << 8 + b[1]) - (a[5] << 8 + a[1])
+        return ((b[5] << 8) + b[1]) - ((a[5] << 8) + a[1])
       });
     }
     return [fleetmap, taisenships, taisenEquips];
