@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {createSelector} from 'reselect'
-import {Container, Row, Col, ListGroup, ListGroupItem, FormGroup, ControlLabel, FormControl} from 'react-bootstrap'
+import {Container, Row, Col, ListGroup, ListGroupItem, FormGroup, ControlLabel, FormControl, OverlayTrigger, Tooltip} from 'react-bootstrap'
 
 import {store} from 'views/create-store'
 
@@ -16,7 +16,7 @@ const pluginDataSelector = createSelector(
   (state) => state || {}
 )
 
-const MaxAntiSub = 88;
+const MaxAntiSub = 100;
 
 export const reactClass = connect(
   state => ({
@@ -259,21 +259,7 @@ export const reactClass = connect(
         }
       }
     }
-    let hret = [];
-    for (let i = 0; i < ret.length; i++) {
-      if (ret[i] == 0) {
-        hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/117.png"></img><span className="badge badge-small">九四</span></span>)
-      } else if (ret[i] == 1) {
-        hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/117.png"></img><span className="badge badge-small">三式</span></span>)
-      } else if (ret[i] == 2) {
-        hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/118.png"></img><span className="badge badge-small">九三</span></span>)
-      } else if (ret[i] == 3) {
-        hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/118.png"></img><span className="badge badge-small">三式</span></span>)
-      } else if (ret[i] == 4) {
-        hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/118.png"></img><span className="badge badge-small">四式</span></span>)
-      }
-    }
-    return [hret, can];
+    return [ret, can];
   }
 
   render() {
@@ -284,26 +270,60 @@ export const reactClass = connect(
     console.log(taisenEquips);
     let shiptypes = ["駆逐艦", "軽巡洋艦", "重雷装巡洋艦", "練習巡洋艦"];
     let list = [];
+
+
+    const drawEquip = (ret) => {
+      let hret = [];
+      for (let i = 0; i < ret.length; i++) {
+        if (ret[i] == 0) {
+          hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/117.png"></img><span className="badge badge-small">九四</span></span>)
+        } else if (ret[i] == 1) {
+          hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/117.png"></img><span className="badge badge-small">三式</span></span>)
+        } else if (ret[i] == 2) {
+          hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/118.png"></img><span className="badge badge-small">九三</span></span>)
+        } else if (ret[i] == 3) {
+          hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/118.png"></img><span className="badge badge-small">三式</span></span>)
+        } else if (ret[i] == 4) {
+          hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/118.png"></img><span className="badge badge-small">四式</span></span>)
+        }
+      }
+      return hret;
+    };
+
+    const calcEquip = (init, ret) => {
+      return ret.reduce((pre, cur) => {
+        switch (cur){
+          case 0: return pre + 5;
+          case 1: return pre + 8;
+          case 2: return pre + 6;
+          case 3: return pre + 10;
+          case 4: return pre + 12;
+        }
+      }, init);
+    };
+
     shiptypes.map((shiptype) => {
       let shipList = alltaisenships[shiptype];
       if (shipList) {
         list.push(
           <ListGroupItem active>
-          <span className="title-type">
-            {[shiptype, <span className="badge">{shipList ? shipList.length : 0}</span>]}
-          </span>
+            <span className="title-type">
+              {[shiptype, <span className="badge">{shipList ? shipList.length : 0}</span>]}
+            </span>
           </ListGroupItem>
         );
         shipList = shipList ? shipList : [];
         shipList.map((ship) => {
           list.push(
-            <ListGroupItem>
+            <ListGroupItem className={ship[5] ? "" : "disabled"}>
               <Row>
-                <Col xs={4}>
-                  lv.{ship[1]}{ship[0]}
-                </Col>
+                <OverlayTrigger placement="right" overlay={<Tooltip id="tooltip">对潜值：{ship[2]}, 装备后对潜值：{calcEquip(ship[2], ship[4])}</Tooltip>}>
+                  <Col xs={4}>
+                      lv.{ship[1]}{ship[0]}
+                  </Col>
+                </OverlayTrigger>
                 <Col xs={8}>
-                  {ship[5]}{ship[4]}
+                  {drawEquip(ship[4])}
                 </Col>
               </Row>
             </ListGroupItem>
