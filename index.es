@@ -116,8 +116,13 @@ export const reactClass = connect(
     var allTaisenEquipsArr = this.getAllTaisenEquips();
     var allTaisenEquips = allTaisenEquipsArr[0];
     var taisenEquips = allTaisenEquipsArr[2];
-    if(MaxAntiSub < 100 && taisenEquips[4]==0){ // test only
-      taisenEquips[4] = 2;
+    if(MaxAntiSub < 100){ // test only
+      if(taisenEquips[4]==0){
+        taisenEquips[4] = 2;
+      }
+      if(taisenEquips[3]< 2){
+        taisenEquips[3] += 4;
+      }
     }
     var taisenships = {};
     var shiplvarr = [];
