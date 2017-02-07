@@ -168,7 +168,7 @@ export const reactClass = connect(
     let ret = [];
     let can = 1;
     if (needEquipTaisen >= slotnum * 12 - 4) {
-      if (needEquipTaisen >= slotnum * 12 - 2) {
+      if (needEquipTaisen > slotnum * 12 - 2) {
         if (slotnum == 3) {
           ret = [4, 4, 4];
           if (taisenEquips[4] < 3) {
