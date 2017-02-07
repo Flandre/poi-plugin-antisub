@@ -16,7 +16,7 @@ const pluginDataSelector = createSelector(
   (state) => state || {}
 )
 
-const MaxAntiSub = 88;
+const MaxAntiSub = 100;
 
 export const reactClass = connect(
   state => ({
