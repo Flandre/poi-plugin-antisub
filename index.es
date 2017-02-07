@@ -30,7 +30,26 @@ export const reactClass = connect(
   }),
   null, null, {pure: false}
 )(class PluginFetchTaisen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      test:"testinfo",
+      v1:"v1"
+    }
+  }
 
+  loadstate(){
+    var v1 = this.state.v1;
+    console.log("v1:"+v1);
+  }
+
+  setstate(){
+    var v1 = this.state.v1;
+    console.log("v1:"+v1);
+    if(v1!="v2"){
+      this.setState({v1:"v2"});
+    }
+  }
 
   getfleetmap() {
     let fleetarr = this.props.fleets;
@@ -277,6 +296,11 @@ export const reactClass = connect(
     let shiptypes = ["駆逐艦", "軽巡洋艦", "重雷装巡洋艦", "練習巡洋艦"];
     let list = [];
 
+    this.loadstate();
+    console.log(111);
+    this.setstate();
+    console.log(333);
+    this.loadstate();
 
     const drawEquip = (ret) => {
       let hret = [];
