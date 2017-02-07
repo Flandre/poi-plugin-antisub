@@ -16,7 +16,7 @@ const pluginDataSelector = createSelector(
   (state) => state || {}
 )
 
-const MaxAntiSub = 100;
+const MaxAntiSub = 88;
 
 export const reactClass = connect(
   state => ({
@@ -287,6 +287,7 @@ export const reactClass = connect(
     return [ret, can];
   }
 
+
   render() {
     const taiseninfo = this.getAllTaiSenShip();
     const fleetmap = taiseninfo[0];
@@ -347,7 +348,7 @@ export const reactClass = connect(
           list.push(
             <ListGroupItem className={ship[5] ? "" : "disabled"}>
               <Row>
-                <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">对潜值：{ship[2]}, 装备后对潜值：{calcEquip(ship[2], ship[4])}</Tooltip>}>
+                <OverlayTrigger placement={this.props.horizontal == 'horizontal' ? 'top' : 'right'} overlay={<Tooltip id="tooltip">对潜值：{ship[2]}, 装备后对潜值：{calcEquip(ship[2], ship[4])}</Tooltip>}>
                   <Col xs={4}>
                       lv.{ship[1]}{ship[0]}
                   </Col>
