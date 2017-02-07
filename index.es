@@ -203,13 +203,15 @@ export const reactClass = connect(
           ret = [1, 2, 2];
         } else if (needYtaisen <= 6 * Yslotnum + 4) {
           ret = [1, 2, 3];
+        } else if (needYtaisen <= 6 * Yslotnum + 6) {
+          ret = [1, 1, 3];
         } else if (needYtaisen <= 6 * Yslotnum + 8) {
           ret = [1, 3, 3];
         } else if (needYtaisen <= 6 * Yslotnum + 10) {
           if (taisenEquips[4] >= 1) {
             ret = [1, 3, 4];
           } else {
-            if (taisenEquips[3] < 3) {
+            if (taisenEquips[3] <= 2) {
               can = 0;
             }
             ret = [3, 3, 3];
@@ -233,15 +235,19 @@ export const reactClass = connect(
           ret = [1, 2, 2, 2];
         } else if (needYtaisen <= 6 * Yslotnum + 4) {
           ret = [1, 2, 2, 3];
+        } else if (needYtaisen <= 6 * Yslotnum + 6) {
+          ret = [1, 1, 2, 3];
         } else if (needYtaisen <= 6 * Yslotnum + 8) {
           ret = [1, 2, 3, 3];
+        } else if (needYtaisen <= 6 * Yslotnum + 10) {
+          ret = [1, 1, 3, 3];
         } else if (needYtaisen <= 6 * Yslotnum + 12) {
-          ret = [1, 3, 3, 3];  //TODO 根据装备在做调整
+          ret = [1, 3, 3, 3];
         } else if (needYtaisen <= 6 * Yslotnum + 14) {
-          if (taisenEquips[4] >= 1) {
+          if (taisenEquips[4] >= 1 && taisenEquips[3]>=2) {
             ret = [1, 3, 3, 4];
           } else {
-            if (taisenEquips[3] < 3) {
+            if (taisenEquips[3] <= 3) {
               can = 0;
             }
             ret = [3, 3, 3, 3];
