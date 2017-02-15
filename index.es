@@ -293,7 +293,6 @@ export const reactClass = connect(
     const fleetmap = taiseninfo[0];
     const alltaisenships = taiseninfo[1];
     const taisenEquips = taiseninfo[2];
-    console.log(taisenEquips);
     let shiptypes = ["駆逐艦", "軽巡洋艦", "重雷装巡洋艦", "練習巡洋艦"];
     let list = [];
     const drawEquip = (ret) => {
