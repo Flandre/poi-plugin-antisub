@@ -191,7 +191,6 @@ export const reactClass = connect(
   }
 
   getBestEquip(ship, taisenEquips,antisub) {
-    console.log(ship,antisub);
     let oritaisen = ship[2];
     let slotnum = ship[3];
     let needEquipTaisen = antisub - oritaisen;

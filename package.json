@@ -1,6 +1,6 @@
 {
   "name": "poi-plugin-antisub",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "index.es",
   "description": "A plugin for poi fetch antisub ships",
   "author": {
