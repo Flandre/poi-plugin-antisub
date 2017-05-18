@@ -147,6 +147,16 @@ export const reactClass = connect(
     let shiplvarr = [];
     for (let p in allships) {
       let ship = allships[p];
+      var shipid = ship.api_ship_id;
+      var oriship = this.props.$ships[shipid];
+      var stype = oriship.api_stype;
+      var antisub=MaxAntiSub;
+      if(stype==1){//海防舰
+        antisub=60;
+      }else if(shipid==526||shipid==529||shipid==380){//大鹰，大鹰改，大鹰改二
+        antisub=65
+      }
+
       let taisen = ship.api_taisen[0];
       let slots = ship.api_slot;
       let equiptaisen = 0;
@@ -158,7 +168,7 @@ export const reactClass = connect(
       }
       let oritaisen = taisen - equiptaisen;
       let slotnum = ship.api_slotnum;
-      if (oritaisen + slotnum * 12 > MaxAntiSub) {
+      if (oritaisen + slotnum * 12 > antisub) {
         let infoshipid = ship.api_ship_id;
         let shiptypenamearr = this.getShipTypeAndName(infoshipid);
         let shiptype = shiptypenamearr[0];
@@ -166,7 +176,7 @@ export const reactClass = connect(
         if (taisenships[shiptype] == undefined) {
           taisenships[shiptype] = []
         }
-        let bestEquipArr = this.getBestEquip([shipname, ship.api_lv, oritaisen, slotnum], taisenEquips);
+        let bestEquipArr = this.getBestEquip([shipname, ship.api_lv, oritaisen, slotnum], taisenEquips,antisub);
         taisenships[shiptype].push([shipname, ship.api_lv, oritaisen, slotnum, bestEquipArr[0], bestEquipArr[1]]);
       }
 
@@ -180,10 +190,11 @@ export const reactClass = connect(
     return [fleetmap, taisenships, taisenEquips];
   }
 
-  getBestEquip(ship, taisenEquips) {
+  getBestEquip(ship, taisenEquips,antisub) {
+    console.log(ship,antisub);
     let oritaisen = ship[2];
     let slotnum = ship[3];
-    let needEquipTaisen = MaxAntiSub - oritaisen;
+    let needEquipTaisen = antisub - oritaisen;
     let ret = [];
     let can = 1;
     if (needEquipTaisen > slotnum * 12 - 4) {
@@ -191,6 +202,11 @@ export const reactClass = connect(
         if (slotnum == 3) {
           ret = [4, 4, 4];
           if (taisenEquips[4] < 3) {
+            can = 0;
+          }
+        } else if(slotnum==2){
+          ret = [4,4];
+          if (taisenEquips[4] < 2) {
             can = 0;
           }
         } else {
@@ -203,6 +219,11 @@ export const reactClass = connect(
         if (slotnum == 3) {
           ret = [3, 4, 4];
           if (taisenEquips[4] < 2) {
+            can = 0;
+          }
+        } else if(slotnum == 2){
+          ret = [3,4];
+          if (taisenEquips[4] < 1) {
             can = 0;
           }
         } else {
@@ -243,6 +264,28 @@ export const reactClass = connect(
           }
         } else if (needYtaisen <= 6 * Yslotnum + 14) {
           ret = [3, 4, 4];
+          if (taisenEquips[4] < 2) {
+            can = 0;
+          }
+        }
+      } else if(slotnum == 2){
+        if(needEquipTaisen<=10){
+          ret = [0,2];
+        }else if(needEquipTaisen<=14){
+          ret = [1,2];
+        }else if(needEquipTaisen<=15){
+          ret = [0,3];
+        }else if(needEquipTaisen<=18){
+          ret = [1,3];
+        }else if(needEquipTaisen<=20){
+          ret = [3,3];
+        }else if(needEquipTaisen<=22){
+          ret = [3,4];
+          if (taisenEquips[4] < 1) {
+            can = 0;
+          }
+        }else if(needEquipTaisen<=20){
+          ret = [4,4];
           if (taisenEquips[4] < 2) {
             can = 0;
           }
@@ -293,7 +336,7 @@ export const reactClass = connect(
     const fleetmap = taiseninfo[0];
     const alltaisenships = taiseninfo[1];
     const taisenEquips = taiseninfo[2];
-    let shiptypes = ["駆逐艦", "軽巡洋艦", "重雷装巡洋艦", "練習巡洋艦"];
+    let shiptypes = ["海防艦","駆逐艦", "軽巡洋艦", "重雷装巡洋艦", "練習巡洋艦"];
     let list = [];
     const drawEquip = (ret) => {
       let hret = [];
