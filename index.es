@@ -128,6 +128,7 @@ export const reactClass = connect(
     tret[4] = cret[12] ? (cret[12]["四式水中聴音機"] ? cret[12]["四式水中聴音機"] : 0) : 0;
     tret[5] = cret[4] ? (cret[4]["九五式爆雷"] ? cret[4]["九五式爆雷"] : 0) : 0;
     tret[6] = cret[7] ? (cret[7]["二式爆雷"] ? cret[7]["二式爆雷"] : 0) : 0;
+    tret[7] = cret[7] ? (cret[7]["九七式艦攻(九三一空)"] ? cret[7]["九七式艦攻(九三一空)"] : 0) : 0;
     return [ret, cret, tret];
   }
 
@@ -155,7 +156,7 @@ export const reactClass = connect(
       var antisub=MaxAntiSub;
       if(stype==1){//海防舰
         antisub=60;
-      }else if(shipid==526||shipid==529||shipid==380){//大鹰，大鹰改，大鹰改二
+      }else if(shipid==529||shipid==380){//大鹰，大鹰改，大鹰改二
         antisub=65
       }
 
@@ -193,6 +194,9 @@ export const reactClass = connect(
   }
 
   getBestEquip(ship, taisenEquips,antisub) {
+    if(ship[0]=="大鷹改"||ship[0]=="大鷹改二"){
+      return [[7],1]
+    }
     let oritaisen = ship[2];
     let slotnum = ship[3];
     let needEquipTaisen = antisub - oritaisen;
@@ -375,7 +379,7 @@ export const reactClass = connect(
     const fleetmap = taiseninfo[0];
     const alltaisenships = taiseninfo[1];
     const taisenEquips = taiseninfo[2];
-    let shiptypes = ["海防艦","駆逐艦", "軽巡洋艦", "重雷装巡洋艦", "練習巡洋艦"];
+    let shiptypes = ["海防艦","駆逐艦", "軽巡洋艦", "重雷装巡洋艦", "練習巡洋艦","軽空母"];
     let list = [];
     const drawEquip = (ret) => {
       let hret = [];
@@ -394,6 +398,8 @@ export const reactClass = connect(
           hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/117.png"></img><span className="badge badge-small">九五</span></span>)
         } else if (ret[i] == 6) {
           hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/117.png"></img><span className="badge badge-small">二式</span></span>)
+        } else if (ret[i] == 7) {
+          hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/108.png"></img><span className="badge badge-small">九七式艦攻(九三一空)</span></span>)
         }
       }
       return hret;
