@@ -126,6 +126,8 @@ export const reactClass = connect(
     tret[2] = cret[6] ? (cret[6]["九三式水中聴音機"] ? cret[6]["九三式水中聴音機"] : 0) : 0;
     tret[3] = cret[10] ? (cret[10]["三式水中探信儀"] ? cret[10]["三式水中探信儀"] : 0) : 0;
     tret[4] = cret[12] ? (cret[12]["四式水中聴音機"] ? cret[12]["四式水中聴音機"] : 0) : 0;
+    tret[5] = cret[4] ? (cret[4]["九五式爆雷"] ? cret[4]["九五式爆雷"] : 0) : 0;
+    tret[6] = cret[7] ? (cret[7]["二式爆雷"] ? cret[7]["二式爆雷"] : 0) : 0;
     return [ret, cret, tret];
   }
 
@@ -236,35 +238,73 @@ export const reactClass = connect(
       let needYtaisen = needEquipTaisen - 8;
       let Yslotnum = slotnum - 1;
       if (slotnum == 3) {
-        if (needYtaisen <= 6 * Yslotnum - 3) {
-          ret = [0, 2, 2];
-        } else if (needYtaisen <= 6 * Yslotnum) {
-          ret = [1, 2, 2];
-        } else if (needYtaisen <= 6 * Yslotnum + 4) {
-          ret = [1, 2, 3];
-        } else if (needYtaisen <= 6 * Yslotnum + 6) {
-          ret = [1, 1, 3];
-        } else if (needYtaisen <= 6 * Yslotnum + 8) {
-          ret = [1, 3, 3];
-        } else if (needYtaisen <= 6 * Yslotnum + 10) {
-          if (taisenEquips[4] >= 1) {
-            ret = [1, 3, 4];
-          } else {
-            if (taisenEquips[3] <= 2) {
+        var step=0;
+        if(taisenEquips[5]>0){
+          if(needEquipTaisen <=15){
+            ret = [0,5,2];
+          }else if(needEquipTaisen <= 18){
+            ret = [1,5,2];
+          }else if(needEquipTaisen <= 19){
+            ret = [0,5,3];
+          }else if(needEquipTaisen <= 22){
+            ret = [1,5,3];
+          }else{
+            step=1;
+          }
+        }else{
+          step=1;
+        }
+        if(step==1){
+          if(taisenEquips[6]>0){
+            if(needEquipTaisen <=18){
+              ret = [0,6,2];
+            }else if(needEquipTaisen <= 21){
+              ret = [1,6,2];
+            }else if(needEquipTaisen <= 22){
+              ret = [0,6,3];
+            }else if(needEquipTaisen <= 25){
+              ret = [1,6,3];
+            }else{
+              step=2;
+            }
+          }else{
+            step=2;
+          }
+        }
+        if(step==2){
+          if(needEquipTaisen <=16){
+            ret = [0,0,2];
+          }else if(needEquipTaisen <= 17){
+            ret = [0,2,2];
+          }else if(needEquipTaisen <= 20){
+            ret = [1,2,2];
+          }else if(needEquipTaisen <= 21){
+            ret = [0,2,3];
+          }else if(needEquipTaisen <= 24){
+            ret = [1,2,3];
+          }else if(needEquipTaisen <= 25){
+            ret = [0,3,3];
+          }else if(needEquipTaisen <= 28){
+            ret = [1,3,3];
+          }else if(needEquipTaisen <= 30){
+            if (taisenEquips[4] >= 1) {
+              ret = [1, 3, 4];
+            } else {
+              if (taisenEquips[3] <= 2) {
+                can = 0;
+              }
+              ret = [3, 3, 3];
+            }
+          }else if(needEquipTaisen <= 32){
+            ret = [3, 3, 4];
+            if (taisenEquips[4] < 1) {
               can = 0;
             }
-            ret = [3, 3, 3];
-          }
-
-        } else if (needYtaisen <= 6 * Yslotnum + 12) {
-          ret = [3, 3, 4];
-          if (taisenEquips[4] < 1) {
-            can = 0;
-          }
-        } else if (needYtaisen <= 6 * Yslotnum + 14) {
-          ret = [3, 4, 4];
-          if (taisenEquips[4] < 2) {
-            can = 0;
+          }else if(needEquipTaisen <= 34){
+            ret = [3, 4, 4];
+            if (taisenEquips[4] < 2) {
+              can = 0;
+            }
           }
         }
       } else if(slotnum == 2){
@@ -350,6 +390,10 @@ export const reactClass = connect(
           hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/118.png"></img><span className="badge badge-small">三式</span></span>)
         } else if (ret[i] == 4) {
           hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/118.png"></img><span className="badge badge-small">四式</span></span>)
+        } else if (ret[i] == 5) {
+          hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/117.png"></img><span className="badge badge-small">九五</span></span>)
+        } else if (ret[i] == 6) {
+          hret.push(<span><img style={{width:"20px"}} src="assets/img/slotitem/117.png"></img><span className="badge badge-small">二式</span></span>)
         }
       }
       return hret;
@@ -363,6 +407,8 @@ export const reactClass = connect(
           case 2: return pre + 6;
           case 3: return pre + 10;
           case 4: return pre + 12;
+          case 5: return pre + 4;
+          case 6: return pre + 7;
         }
       }, init);
     };
