@@ -415,6 +415,7 @@ export const reactClass = connect(
           case 4: return pre + 12;
           case 5: return pre + 4;
           case 6: return pre + 7;
+          case 7: return pre + 7;
         }
       }, init);
     };
